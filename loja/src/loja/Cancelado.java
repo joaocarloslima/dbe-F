@@ -8,7 +8,7 @@ public class Cancelado extends Situacao {
 	}
 
 	@Override
-	public void reabrir(Pedido pedido) {
+	public void reabrir(PedidoInterface pedido) {
 		pedido.setSituacao(new Aberto());
 	}
 

@@ -3,13 +3,14 @@ package loja.desconto;
 import java.math.BigDecimal;
 
 import loja.Pedido;
+import loja.PedidoInterface;
 
 public class TestaDesconto {
 	public static void main(String[] args) {
 		CalculadoraDeDesconto calculadoraDeDesconto = 
 				new CalculadoraDeDesconto();
 		
-		Pedido pedido = new Pedido(new BigDecimal("100"), 20);
+		PedidoInterface pedido = new Pedido(new BigDecimal("100"), 20);
 		
 		BigDecimal desconto = calculadoraDeDesconto.calcular(pedido);
 		
