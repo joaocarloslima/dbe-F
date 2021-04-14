@@ -13,9 +13,11 @@
 	<ui:define name="title">Progamer - New Setup</ui:define>
 	
 	<ui:define name="content">
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
 		
 		<h:form>
 		<p:card class="card-form">
+		
 		    <f:facet name="title">
 		        New Setup
 		    </f:facet>
@@ -24,29 +26,73 @@
 				<div class="p-field p-grid">
 				    <label for="name" class="p-col-fixed" style="width:100px">Name</label>
 				    <div class="p-col">
-				        <p:inputText id="name" type="text" value="#{setupBean.setup.name}" />
+				        <p:inputText id="name" type="text" value="#{setupBean.setup.name}" required="true">
+				        	<f:ajax event="blur" render="messages"/>
+				        </p:inputText>
 				    </div>
 				</div>
 				<div class="p-field p-grid">
 				    <label for="description" class="p-col-fixed" style="width:100px">Description</label>
 				    <div class="p-col">
-				        <p:inputTextarea id="description" type="text" value="#{setupBean.setup.description}" />
+				        <p:inputTextarea id="description" type="text" value="#{setupBean.setup.description}">
+				        	<f:validateLength minimum="10"/>
+				        	<f:ajax event="blur" render="messages"/>
+				        </p:inputTextarea>
 				    </div>
 				</div>
 				<div class="p-field p-grid">
 				    <label for="price" class="p-col-fixed" style="width:50px">Price</label>
 				    <div class="p-col">
-				        <p:inputText id="price" value="#{setupBean.setup.price}" />
+				        <p:inputText id="price" value="#{setupBean.setup.price}" >
+				       		<f:validateDoubleRange minimum="0"/>
+				       		<f:ajax event="blur" render="messages"/>
+				        </p:inputText>
 				    </div>
 				</div>
 			</div>
 		    
 		    <f:facet name="footer">
-		        <p:commandButton icon="pi pi-save" value="Save" action="#{setupBean.save}"/>
+		        <p:commandButton icon="pi pi-save" value="Save" action="#{setupBean.save}">
+		        	<f:ajax execute="@form" render="messages" />
+		        </p:commandButton>
 		        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
 		    </f:facet>
 		</p:card>
 		</h:form>
+		
+		
+		<h:form>
+			<p:dataTable value="#{setupBean.setups}" var="setup">
+				<p:column headerText="Name">
+					<h:outputText value="#{setup.name}"/>
+				</p:column>
+				<p:column headerText="price">
+					<h:outputText value="#{setup.price}"/>
+				</p:column>
+			</p:dataTable>
+			
+		</h:form>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	</ui:define>
 		
