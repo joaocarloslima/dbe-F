@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"    
+>
+		
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="title">Progamer - User</ui:define>
+	
+	<ui:define name="content">
+		<p:messages id="messages"><p:autoUpdate /></p:messages>
+		
+		<h:form>
+		<p:card class="card-form">
+		
+		    <f:facet name="title">
+		        New User
+		    </f:facet>
+		   
+		   <div class="ui-fluid">
+				
+				<div class="p-field p-grid">
+				    <label for="name" class="p-col-fixed" style="width:100px">Name</label>
+				    <div class="p-col">
+				        <p:inputText id="name" type="text" value="#{userBean.user.name}" required="true">
+				        	<f:ajax event="blur" render="messages"/>
+				        </p:inputText>
+				    </div>
+				</div>
+				
+				<div class="p-field p-grid">
+				    <label for="birthday" class="p-col-fixed" style="width:100px">Birthday</label>
+				    <div class="p-col">
+				        <p:calendar 
+				        	id="birthday" 
+				        	value="#{userBean.user.birthday}" 
+				        	required="true"
+				        	showOn="button"
+				        	mask="dd/MM/yyyy"
+				        >
+				        	<f:ajax event="blur" render="messages"/>
+				        </p:calendar>
+				    </div>
+				</div>
+				
+				<div class="p-field p-grid">
+				    <label for="email" class="p-col-fixed" style="width:100px">E-mail</label>
+				    <div class="p-col">
+				        <p:inputText 
+				        		id="email" 
+				        		type="text" 
+				        		value="#{userBean.user.email}" 
+				        		required="true"
+				        		validatorMessage="E-mail inválido"
+				        	>
+				        	<f:ajax event="blur" render="messages"/>
+				        	<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+				        </p:inputText>
+				    </div>
+				</div>
+				
+				<div class="p-field p-grid">
+				    <label for="password" class="p-col-fixed" style="width:100px">Password</label>
+				    <div class="p-col">
+				        <p:password 
+				        		id="password" 
+				        		type="text" 
+				        		value="#{userBean.user.password}" 
+				        		required="true"
+				        		toggleMask="true"
+				        		feedback="true"
+
+				        >
+				        	<f:ajax event="blur" render="messages"/>
+				        </p:password>
+				    </div>
+				</div>
+				
+				
+				
+			</div>
+		    
+		    <f:facet name="footer">
+		        <p:commandButton icon="pi pi-save" value="Save" action="#{userBean.save}">
+		        	<f:ajax execute="@form" render="messages" />
+		        </p:commandButton>
+		        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+		    </f:facet>
+		</p:card>
+		</h:form>
+		
+		
+		<h:form>
+			<p:dataTable value="#{userBean.users}" var="user">
+				<p:column headerText="Name">
+					<h:outputText value="#{user.name}"/>
+				</p:column>
+				<p:column headerText="Birthday">
+					<h:outputText value="#{user.birthday}">
+						<f:convertDateTime locale="pt_BR" dateStyle="short" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="E-mail">
+					<h:outputText value="#{user.email}"/>
+				</p:column>
+			</p:dataTable>
+			
+		</h:form>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</ui:define>
+		
+</ui:composition>	
+		
+
+</html>
