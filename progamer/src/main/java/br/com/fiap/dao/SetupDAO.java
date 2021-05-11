@@ -28,4 +28,16 @@ public class SetupDAO {
 		return query.getResultList();
 	}
 
+	public Setup findById(Long id) {
+		return manager.find(Setup.class, id);
+	}
+
+	public void update(Setup setup) {
+		manager.getTransaction().begin();
+		manager.merge(setup);
+		manager.flush();
+		manager.getTransaction().commit();
+		
+	}
+
 }
